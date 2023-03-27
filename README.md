@@ -9,6 +9,7 @@ Please use instructions on our [project page](https://www.cmu-exploration.com).
 和原版的差别：
 1. 修改了 /cmd_vel 话题的消息类型，方法是定义了一个接收话题的节点为 remapTwist 。
 2. 修改了机器人的尺寸、速度，以及激光雷达传感器的位置，并重新根据需要运行了生成路径的 matlab 脚本。
+3. 增加仿真和实车自动选择。
 
 实车测试使用方法：
 
