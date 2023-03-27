@@ -11,6 +11,18 @@ Please use instructions on our [project page](https://www.cmu-exploration.com).
 2. 修改了机器人的尺寸、速度，以及激光雷达传感器的位置，并重新根据需要运行了生成路径的 matlab 脚本。
 3. 增加仿真和实车自动选择。
 
+仿真方法：(需要有显示屏)
+```shell
+# 运行下面命令下载仿真环境，大概500MB
+./src/vehicle_simulator/mesh/download_environments.sh
+# 安装 usb 驱动
+sudo apt install libusb-dev
+
+source ./devel/setup.bash
+roslaunch vehicle_simulator system_garage.launch
+```
+
+
 实车测试使用方法：
 
 新开终端并输入以下命令：
