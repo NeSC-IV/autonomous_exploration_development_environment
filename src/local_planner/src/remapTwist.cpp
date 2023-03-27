@@ -25,6 +25,13 @@ public:
         cmd_vel.angular.x = cmu_cmd_vel.twist.angular.x;
         cmd_vel.angular.y = cmu_cmd_vel.twist.angular.y;
         cmd_vel.angular.z = cmu_cmd_vel.twist.angular.z;
+
+        if(cmd_vel.angular.z > 1){
+            cmd_vel.angular.z = 0.25;
+        }
+        if(cmd_vel.angular.z < -1){
+            cmd_vel.angular.z = -0.25;
+        }
         // if(cmu_cmd_vel.twist.angular.z != 0){
         //     ROS_INFO("cmu_cmd_vel.z 的值：%f \n", cmu_cmd_vel.twist.angular.z);
         // }

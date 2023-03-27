@@ -23,7 +23,7 @@
     <param name="vehicleHeight" type="double" value="1.5" />
     <param name="voxelPointUpdateThre" type="int" value="100" />
     <param name="voxelTimeUpdateThre" type="double" value="2.0" />
-    <param name="minRelZ" type="double" value="-0.50" />
+    <param name="minRelZ" type="double" value="-0.45" />
     <!-- <param name="minRelZ" type="double" value="-2.5" /> -->
     <param name="maxRelZ" type="double" value="0.4" />
     <param name="disRatioZ" type="double" value="0.2" />
