@@ -38,8 +38,6 @@
     <arg name="gui" value="$(arg gazebo_gui)"/>
   </include>
 
-  <include file="$(find loam_interface)/launch/loam_interface.launch" />
-
   <include file="$(find sensor_scan_generation)/launch/sensor_scan_generation.launch" />
 
   <include file="$(find visualization_tools)/launch/visualization_tools.launch" >
@@ -49,3 +47,4 @@
   <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find vehicle_simulator)/rviz/vehicle_simulator.rviz" respawn="true"/>
 
 </launch>
+
