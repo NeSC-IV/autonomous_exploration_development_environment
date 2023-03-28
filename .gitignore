@@ -27,3 +27,4 @@ src/vehicle_simulator/log/*
 !readme.txt
 
 src/FAST_LIO/PCD/*
+src/vehicle_simulator/rviz/*
