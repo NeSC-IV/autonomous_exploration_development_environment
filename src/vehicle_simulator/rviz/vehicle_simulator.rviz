@@ -5,6 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /TF1
         - /TF1/Frames1
         - /PointCloud21
       Splitter Ratio: 0.729411780834198
@@ -148,7 +149,7 @@ Visualization Manager:
       Color: 255; 0; 0
       Color Transformer: Intensity
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: true
       Max Color: 255; 255; 255
       Max Intensity: 0.20000000298023224
@@ -165,7 +166,7 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
@@ -358,49 +359,49 @@ Visualization Manager:
       Frames:
         All Enabled: false
         base_footprint:
-          Value: true
+          Value: false
         base_link:
-          Value: true
+          Value: false
         body:
-          Value: true
+          Value: false
         camera:
           Value: false
         camera_init:
-          Value: true
+          Value: false
         front_bumper_link:
-          Value: true
+          Value: false
         front_left_wheel_link:
-          Value: true
+          Value: false
         front_right_wheel_link:
-          Value: true
+          Value: false
         imu_link:
-          Value: true
+          Value: false
         inertial_link:
-          Value: true
+          Value: false
         map:
           Value: true
         odom:
-          Value: true
+          Value: false
         rear_bumper_link:
-          Value: true
+          Value: false
         rear_left_wheel_link:
-          Value: true
+          Value: false
         rear_right_wheel_link:
-          Value: true
+          Value: false
         sensor:
           Value: true
         sensor_at_scan:
           Value: false
         top_chassis_link:
-          Value: true
+          Value: false
         top_plate_front_link:
-          Value: true
+          Value: false
         top_plate_link:
-          Value: true
+          Value: false
         top_plate_rear_link:
-          Value: true
+          Value: false
         user_rail_link:
-          Value: true
+          Value: false
         vehicle:
           Value: true
         velodyne:
@@ -467,7 +468,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 8.2888765335083
+      Distance: 3.2683277130126953
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -475,17 +476,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.5070353150367737
-        Y: -0.134019136428833
-        Z: -0.406948059797287
+        X: 0.408966600894928
+        Y: -0.6371888518333435
+        Z: -0.795834481716156
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8997971415519714
+      Pitch: 0.6047972440719604
       Target Frame: vehicle
-      Yaw: 3.0406529903411865
+      Yaw: 3.1908249855041504
     Saved: ~
 Window Geometry:
   Displays:
@@ -506,4 +507,4 @@ Window Geometry:
     collapsed: false
   Width: 1829
   X: 174
-  Y: 43
+  Y: 27
