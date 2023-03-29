@@ -28,3 +28,4 @@ src/vehicle_simulator/log/*
 
 src/FAST_LIO/PCD/*
 src/vehicle_simulator/rviz/*
+.vscode/*

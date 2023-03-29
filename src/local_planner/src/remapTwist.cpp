@@ -30,7 +30,7 @@ public:
             cmd_vel.angular.z = 0.25;
         }
         if(cmd_vel.angular.z < -1){
-            cmd_vel.angular.z = -0.25;
+            cmd_vel.angular.z = -0.1;
         }
         // if(cmu_cmd_vel.twist.angular.z != 0){
         //     ROS_INFO("cmu_cmd_vel.z 的值：%f \n", cmu_cmd_vel.twist.angular.z);
