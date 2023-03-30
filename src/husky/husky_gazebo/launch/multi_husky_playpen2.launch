@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<launch>
+
+ <!-- <include file="$(find multimaster_launch)/launch/multimaster_gazebo.launch"/> -->
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find husky_gazebo)/launch/playpen.launch" />
+  <!-- <include file="$(find husky_gazebo)/launch/empty_world.launch" /> -->
+
+
+  <include file="$(find husky_gazebo)/launch/spawn_husky.launch">
+    <arg name="robot_namespace" value="husky_alpha"/>
+    <!-- <arg name="multimaster" value="false"/> -->
+    <arg name="husky_name" value="husky_alpha"/>
+  </include>
+
+  <include file="$(find husky_gazebo)/launch/spawn_husky.launch">
+    <arg name="robot_namespace" value="husky_beta"/>
+    <!-- <arg name="multimaster" value="false"/> -->
+    <arg name="x" value="0.0"/>
+    <arg name="y" value="4.0"/>
+    <arg name="yaw" value="30.0"/>
+    <arg name="husky_name" value="husky_beta"/>
+  </include>
+
+  <include file="$(find husky_gazebo)/launch/spawn_husky.launch">
+    <arg name="robot_namespace" value="husky_gamma"/>
+    <!-- <arg name="multimaster" value="false"/> -->
+    <arg name="x" value="0.0"/>
+    <arg name="y" value="6.0"/>
+    <arg name="yaw" value="45.0"/>
+    <arg name="husky_name" value="husky_gamma"/>
+  </include>
+
+</launch>
