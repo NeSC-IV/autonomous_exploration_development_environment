@@ -2,7 +2,7 @@
  * @Author: jia
  * @Date: 2023-03-27 23:01:16
  * @LastEditors: jia
- * @LastEditTime: 2023-03-30 15:12:00
+ * @LastEditTime: 2023-04-05 21:42:40
  * @Description: 请填写简介
 -->
 Note: This is the open source code of CMU, and it is only suitable for our platform. Please find the original program on the official website.
@@ -18,7 +18,17 @@ Please use instructions on our [project page](https://www.cmu-exploration.com).
 1. 修改了 /cmd_vel 话题的消息类型，方法是定义了一个接收话题的节点为 remapTwist 。
 2. 修改了机器人的尺寸、速度，以及激光雷达传感器的位置，并重新根据需要运行了生成路径的 matlab 脚本。
 3. 增加仿真和实车自动选择。
-4. 加入Husky仿真环境，并实现多机器人仿真。
+4. 加入Husky仿真环境，并实现多机器人仿真,但还没有实现基于AEDE框架的多机器人仿真。
+5. 更换仿真中Husky的传感器为16线激光雷达
+
+下一步计划：
+1. 使用husky仿真AEDE框架
+2. 将Husky的仿真添加到AEDE框架中，实现没有gazebo ui的仿真。
+
+多机器人协同建图任务：
+多个机器人从同一起点出发，不断探索未知区域，探索时间尽可能短，探索面积尽可能大。
+在协同建图的过程中，可以增加以下功能：
+1. 利用多个机器人的地图提高单机器人的定位精度
 
 测试环境：
 ubuntu 20.04 + ROS1 noetic
@@ -33,6 +43,19 @@ sudo apt install libusb-dev
 source ./devel/setup.bash
 roslaunch vehicle_simulator system_garage.launch
 ```
+单Husky机器人仿真命令:
+```shell
+roslaunch husky_gazebo husky_playpen.launch
+```
+单Husky机器人 基于AEDE框架仿真，仿真起来较卡：
+```shell
+roslaunch husky_gazebo husky_garage.launch
+```
+单Husky机器人基于AEDE框架的仿真结果：
+<img src="img/single_husky_AEDA.png" alt="Header" width="100%"/>
+<img src="img/single_husky_AEDE_RVIZ.png" alt="Header" width="100%"/>
+<img src="img/single_husky_AEDE_RVIZ_move.png" alt="Header" width="100%"/>
+
 如果想仿真多个Husky机器人，采用以下方法修改源码：
 ```
 1. set <arg name="multimaster" value="false"/> in multi_husky_playpen2.launch
