@@ -1,6 +1,9 @@
 <launch>
 
+  <!-- 当使用的是husky机器人时，设置为true ,无论真husky还是仿真husky-->
   <arg name="robot_real" default="false" />
+  <!-- 当仿真husky时，设置为true -->
+  <arg name="husky_sim" default="false" />
   <arg name="sensorOffsetX" default="0.05"/>
   <arg name="sensorOffsetY" default="0"/>
   <arg name="cameraOffsetZ" default="0"/>
@@ -34,8 +37,12 @@
     <param name="costScore" type="double" value="0.02" />
     <param name="useCost" type="bool" value="false" />
     <param name="pointPerPathThre" type="int" value="2" />
-    <param name="minRelZ" type="double" value="-0.2" />
-    <param name="maxRelZ" type="double" value="0.45" />
+    <!-- 实车 -->
+    <!-- <param name="minRelZ" type="double" value="-0.2" />
+    <param name="maxRelZ" type="double" value="0.45" /> -->
+    <!-- 仿真husky -->
+    <param name="minRelZ" type="double" value="-0.1" />
+    <param name="maxRelZ" type="double" value="0.65" />
 
     <param name="maxSpeed" value="$(arg maxSpeed)" />
     <param name="dirWeight" type="double" value="0.02" />
@@ -93,7 +100,9 @@
 
 
   <group if="$(arg robot_real)">
-  <node pkg="local_planner" type="remapTwist" name="remapTwist" required="true" />
+    <node pkg="local_planner" type="remapTwist" name="remapTwist" required="true" >
+    <remap if="$(arg husky_sim)" from="/cmd_vel" to="/husky_alpha/cmd_vel"  />
+  </node>
   <!-- Modified -->
   <node pkg="tf" type="static_transform_publisher" name="velodyneTransPublisher" args="0 0 0 0 0 0 /sensor /velodyne 1000"/>
   </group>

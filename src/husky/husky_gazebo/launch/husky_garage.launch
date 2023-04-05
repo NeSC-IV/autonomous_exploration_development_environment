@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- local planner -->
+  <arg name="cameraOffsetZ" default="0"/>
+  <arg name="vehicleX" default="0"/>
+  <arg name="vehicleY" default="0"/>
+  <arg name="checkTerrainConn" default="true"/>
+
+  <!-- <include file="$(find ps3joy)/launch/ps3.launch" /> -->
+
+  <include file="$(find local_planner)/launch/local_planner.launch" >
+    <arg name="cameraOffsetZ" value="$(arg cameraOffsetZ)"/>
+    <arg name="goalX" value="$(arg vehicleX)"/>
+    <arg name="goalY" value="$(arg vehicleY)"/>
+    <arg name="sensorOffsetX" default="0.0"/>
+    <arg name="sensorOffsetY" default="0"/>
+    <arg name="robot_real" value="true"/>
+    <arg name="husky_sim" value="true"/>
+  </include>
+
+  <!-- terrain_analysis -->
+  <include file="$(find terrain_analysis)/launch/terrain_analysis.launch" />
+
+  <include file="$(find terrain_analysis_ext)/launch/terrain_analysis_ext.launch" >
+    <arg name="checkTerrainConn" value="$(arg checkTerrainConn)"/>
+  </include>
+
+  <!-- simulation environment -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="false"/>
+  <arg name="world_name" default="garage"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="verbose" value="$(arg verbose)"/>
+    <arg name="world_name" value="$(find vehicle_simulator)/world/$(arg world_name).world"/>
+  </include>
+
+  <include file="$(find husky_gazebo)/launch/spawn_husky.launch">
+    <arg name="robot_namespace" value="husky_alpha"/>
+    <arg name="husky_name" value="husky_alpha"/>
+  </include>
+
+  <!-- sensor_scan_generation -->
+  <include file="$(find sensor_scan_generation)/launch/sensor_scan_generation.launch" />
+  <!-- 仿真环境的点云 -->
+  <include file="$(find visualization_tools)/launch/visualization_tools.launch" >
+    <arg name="world_name" value="$(arg world_name)"/>
+  </include>
+  <!-- loam_interface -->
+  <include file="$(find loam_interface)/launch/loam_interface.launch" />
+  <!-- fast_lio -->
+  <include file="$(find fast_lio)/launch/mapping_velodyne_sim.launch" />
+  <!-- rviz -->
+  <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find vehicle_simulator)/rviz/vehicle_simulator.rviz" respawn="true"/>
+
+
+</launch>
