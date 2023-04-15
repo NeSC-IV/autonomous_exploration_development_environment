@@ -2,7 +2,7 @@
  * @Author: jia
  * @Date: 2023-03-27 23:01:16
  * @LastEditors: jia
- * @LastEditTime: 2023-04-05 21:42:40
+ * @LastEditTime: 2023-04-16 00:08:28
  * @Description: 请填写简介
 -->
 Note: This is the open source code of CMU, and it is only suitable for our platform. Please find the original program on the official website.
@@ -20,10 +20,11 @@ Please use instructions on our [project page](https://www.cmu-exploration.com).
 3. 增加仿真和实车自动选择。
 4. 加入Husky仿真环境，并实现多机器人仿真,但还没有实现基于AEDE框架的多机器人仿真。
 5. 更换仿真中Husky的传感器为16线激光雷达
+6. 使用husky仿真AEDE框架
+7. 将单个Husky的仿真添加到AEDE框架中，实现没有gazebo ui的仿真。
 
 下一步计划：
-1. 使用husky仿真AEDE框架
-2. 将Husky的仿真添加到AEDE框架中，实现没有gazebo ui的仿真。
+1. 将多个个Husky的仿真添加到AEDE框架中
 
 多机器人协同建图任务：
 多个机器人从同一起点出发，不断探索未知区域，探索时间尽可能短，探索面积尽可能大。
@@ -85,4 +86,8 @@ roslaunch vehicle_simulator system_real_robot.launch
 #　在　vehicle_simulator.rviz　目录下运行如下命令：
 rviz -d vehicle_simulator.rviz 
 ```
-
+## 基于原程序的单机器人仿真搭建多机器人仿真
+先改造的原CMU的机器人模型，但稍微修改就报错，于是自己新建了一个包含雷达和相机的机器人urdf文件，使用以下命令可以查看新建的机器人模型：
+```shell
+roslaunch vehicle_simulator little_robot_example.launch
+```
