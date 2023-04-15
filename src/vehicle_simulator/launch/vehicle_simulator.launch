@@ -24,26 +24,9 @@
   <arg name="InclFittingThre" default="0.2"/>
   <arg name="maxIncl" default="30.0"/>
 
-  <arg name="paused" default="false"/>
-  <arg name="use_sim_time" default="true"/>
-  <arg name="gui" default="false"/>
-  <arg name="headless" default="false"/>
-  <arg name="debug" default="false"/>
-  <arg name="verbose" default="false"/>
-  <arg name="world_name" default="garage"/>
-
-  <include file="$(find gazebo_ros)/launch/empty_world.launch" >
-    <arg name="paused" value="$(arg paused)"/>
-    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
-    <arg name="gui" value="$(arg gui)"/>
-    <arg name="headless" value="$(arg headless)"/>
-    <arg name="debug" value="$(arg debug)"/>
-    <arg name="verbose" value="$(arg verbose)"/>
-    <arg name="world_name" value="$(find vehicle_simulator)/world/$(arg world_name).world"/>
-  </include>
 
   <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find vehicle_simulator)/urdf/robot.urdf.xacro'" />
-  <node pkg="gazebo_ros" type="spawn_model" name="spawn_robot" args="-urdf -param /robot_description -model robot"/>
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_robot" args="-urdf -param /robot_description -model robot" />
 
   <param name="camera_description" command="$(find xacro)/xacro --inorder '$(find vehicle_simulator)/urdf/camera.urdf.xacro'" />
   <node pkg="gazebo_ros" type="spawn_model" name="spawn_camera" args="-urdf -param /camera_description -model camera"/>
@@ -76,5 +59,6 @@
     <param name="InclFittingThre" value="$(arg InclFittingThre)" />
     <param name="maxIncl" value="$(arg maxIncl)" />
   </node>
+
 
 </launch>
