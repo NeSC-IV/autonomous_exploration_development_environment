@@ -11,8 +11,8 @@
     </gazebo>
   </xacro:macro>
 
-  <!-- Base Footprint -->
-  <link name="base_footprint" >
+  <!-- Base Origin -->
+  <link name="base_origin" >
     <origin xyz="0 0 0.0" rpy="0 0 0"/>
     <collision>
       <geometry>
@@ -23,7 +23,7 @@
 
   <!-- Base Link -->
   <joint name="footprint" type="fixed" >
-   <parent link="base_footprint" />
+   <parent link="base_origin" />
     <child link="base_link" />
     <origin xyz="0 0 0.3" rpy="0 0 0" />
   </joint>
@@ -40,11 +40,9 @@
       </geometry>
     </collision>
     <inertial>
-      <origin xyz="0 0 0"/>
-      <mass value="10"/>
-      <inertia ixx="3.0" ixy="0.0" ixz="0.0"
-               iyy="3.0" iyz="0.0" 
-               izz="3.0" />
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
     </inertial>
   </link>
 
@@ -246,10 +244,16 @@
   </gazebo>
   <xacro:gazebo_material ref="camera"  color="Black" />
 
-
+  <!-- lidar Link -->
+  <joint name="lidar_joint" type="fixed">
+    <origin xyz="0.0 0 0" rpy="0 0 0"/>
+    <parent link="lidar_holder"/>
+    <child link="lidar"/>
+  </joint>
+  <link name="lidar" />
 
   <xacro:include filename="$(find vehicle_simulator)/urdf/VLP-16.urdf.xacro"/>
-  <xacro:VLP-16 parent="lidar_holder" name="velodyne" topic="/velodyne_points" organize_cloud="${organize_cloud}" hz="10" samples="440" gpu="${gpu}">
+  <xacro:VLP-16 parent="lidar" name="velodyne" topic="/velodyne_points" organize_cloud="${organize_cloud}" hz="10" samples="440" gpu="${gpu}">
     <origin xyz="0 0 0.35" rpy="0 0 0" />
   </xacro:VLP-16>
 

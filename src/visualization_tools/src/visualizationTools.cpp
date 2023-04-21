@@ -224,27 +224,27 @@ int main(int argc, char** argv)
   nhPrivate.getParam("overallMapDisplayInterval", overallMapDisplayInterval);
   nhPrivate.getParam("exploredAreaDisplayInterval", exploredAreaDisplayInterval);
 
-  ros::Subscriber subOdometry = nh.subscribe<nav_msgs::Odometry> ("/state_estimation", 5, odometryHandler);
+  ros::Subscriber subOdometry = nh.subscribe<nav_msgs::Odometry> ("state_estimation", 5, odometryHandler);
 
-  ros::Subscriber subLaserCloud = nh.subscribe<sensor_msgs::PointCloud2> ("/registered_scan", 5, laserCloudHandler);
+  ros::Subscriber subLaserCloud = nh.subscribe<sensor_msgs::PointCloud2> ("registered_scan", 5, laserCloudHandler);
 
-  ros::Subscriber subRuntime = nh.subscribe<std_msgs::Float32> ("/runtime", 5, runtimeHandler);
+  ros::Subscriber subRuntime = nh.subscribe<std_msgs::Float32> ("runtime", 5, runtimeHandler);
 
-  ros::Publisher pubOverallMap = nh.advertise<sensor_msgs::PointCloud2> ("/overall_map", 5);
+  ros::Publisher pubOverallMap = nh.advertise<sensor_msgs::PointCloud2> ("overall_map", 5);
 
-  ros::Publisher pubExploredArea = nh.advertise<sensor_msgs::PointCloud2> ("/explored_areas", 5);
+  ros::Publisher pubExploredArea = nh.advertise<sensor_msgs::PointCloud2> ("explored_areas", 5);
   pubExploredAreaPtr = &pubExploredArea;
 
-  ros::Publisher pubTrajectory = nh.advertise<sensor_msgs::PointCloud2> ("/trajectory", 5);
+  ros::Publisher pubTrajectory = nh.advertise<sensor_msgs::PointCloud2> ("trajectory", 5);
   pubTrajectoryPtr = &pubTrajectory;
 
-  ros::Publisher pubExploredVolume = nh.advertise<std_msgs::Float32> ("/explored_volume", 5);
+  ros::Publisher pubExploredVolume = nh.advertise<std_msgs::Float32> ("explored_volume", 5);
   pubExploredVolumePtr = &pubExploredVolume;
 
-  ros::Publisher pubTravelingDis = nh.advertise<std_msgs::Float32> ("/traveling_distance", 5);
+  ros::Publisher pubTravelingDis = nh.advertise<std_msgs::Float32> ("traveling_distance", 5);
   pubTravelingDisPtr = &pubTravelingDis;
 
-  ros::Publisher pubTimeDuration = nh.advertise<std_msgs::Float32> ("/time_duration", 5);
+  ros::Publisher pubTimeDuration = nh.advertise<std_msgs::Float32> ("time_duration", 5);
   pubTimeDurationPtr = &pubTimeDuration;
 
   //ros::Publisher pubRuntime = nh.advertise<std_msgs::Float32> ("/runtime", 5);

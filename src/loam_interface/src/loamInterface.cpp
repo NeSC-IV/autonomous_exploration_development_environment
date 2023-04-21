@@ -27,8 +27,8 @@ using namespace std;
 
 const double PI = 3.1415926;
 
-string stateEstimationTopic = "/integrated_to_init";
-string registeredScanTopic = "/velodyne_cloud_registered";
+string stateEstimationTopic = "integrated_to_init";
+string registeredScanTopic = "velodyne_cloud_registered";
 bool flipStateEstimation = true;
 bool flipRegisteredScan = true;
 bool sendTF = true;
@@ -123,13 +123,13 @@ int main(int argc, char** argv)
 
   ros::Subscriber subLaserCloud = nh.subscribe<sensor_msgs::PointCloud2> (registeredScanTopic, 5, laserCloudHandler);
 
-  ros::Publisher pubOdometry = nh.advertise<nav_msgs::Odometry> ("/state_estimation", 5);
+  ros::Publisher pubOdometry = nh.advertise<nav_msgs::Odometry> ("state_estimation", 5);
   pubOdometryPointer = &pubOdometry;
 
   tf::TransformBroadcaster tfBroadcaster;
   tfBroadcasterPointer = &tfBroadcaster;
 
-  ros::Publisher pubLaserCloud = nh.advertise<sensor_msgs::PointCloud2> ("/registered_scan", 5);
+  ros::Publisher pubLaserCloud = nh.advertise<sensor_msgs::PointCloud2> ("registered_scan", 5);
   pubLaserCloudPointer = &pubLaserCloud;
 
   ros::spin();

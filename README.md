@@ -91,3 +91,7 @@ rviz -d vehicle_simulator.rviz
 ```shell
 roslaunch vehicle_simulator little_robot_example.launch
 ```
+多机器人仿真：
+```shell
+roslaunch vehicle_simulator system_garage_multi_robot.launch
+```

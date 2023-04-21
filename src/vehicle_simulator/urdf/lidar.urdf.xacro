@@ -1,12 +1,21 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="example">
 
+  <xacro:arg name="gpu" default="false"/>
+  <xacro:property name="gpu" value="$(arg gpu)" />
+  <xacro:arg name="organize_cloud" default="false"/>
+  <xacro:property name="organize_cloud" value="$(arg organize_cloud)" />
 
   <link name="lidar" />
 
 
-  <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
+  <!-- <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
   <xacro:VLP-16 parent="lidar" name="velodyne" topic="/velodyne_points" hz="5" samples="350" min_range="0.1" organize_cloud="true">
     <origin xyz="0.0 0.0 0" rpy="0 0 0" />
+  </xacro:VLP-16> -->
+
+  <xacro:include filename="$(find vehicle_simulator)/urdf/VLP-16.urdf.xacro"/>
+  <xacro:VLP-16 parent="lidar" name="velodyne" topic="velodyne_points" organize_cloud="${organize_cloud}" hz="5" samples="350" min_range="0.1" gpu="${gpu}">
+    <origin xyz="0 0 0.0" rpy="0 0 0" />
   </xacro:VLP-16>
 
 </robot>

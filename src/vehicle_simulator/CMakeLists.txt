@@ -80,3 +80,28 @@ install(DIRECTORY urdf/
 install(DIRECTORY world/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/world
 )
+
+# 添加了以下内容
+## Declare executables
+add_executable(vehicleSimulator2 src/vehicleSimulator2.cpp)
+
+## Specify libraries to link a library or executable target against
+target_link_libraries(vehicleSimulator2 ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES})
+
+install(TARGETS vehicleSimulator2
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+## Declare executables
+add_executable(vehicleSimulator3 src/vehicleSimulator3.cpp)
+
+## Specify libraries to link a library or executable target against
+target_link_libraries(vehicleSimulator3 ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES})
+
+install(TARGETS vehicleSimulator3
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)

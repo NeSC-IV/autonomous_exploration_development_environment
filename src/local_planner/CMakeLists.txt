@@ -52,15 +52,17 @@ link_directories(
 add_executable(localPlanner src/localPlanner.cpp)
 add_executable(pathFollower src/pathFollower.cpp)
 add_executable(remapTwist src/remapTwist.cpp)
-
+add_executable(localPlanner2 src/localPlanner2.cpp)
+add_executable(pathFollower2 src/pathFollower2.cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(localPlanner ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(pathFollower ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(remapTwist ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+target_link_libraries(localPlanner2 ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+target_link_libraries(pathFollower2 ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
-
-install(TARGETS localPlanner pathFollower
+install(TARGETS localPlanner pathFollower localPlanner2 pathFollower2
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

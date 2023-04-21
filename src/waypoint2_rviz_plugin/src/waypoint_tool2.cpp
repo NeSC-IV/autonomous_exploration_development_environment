@@ -5,11 +5,11 @@
  * @LastEditTime: 2023-04-19 16:04:28
  * @Description: 请填写简
  */
-#include "waypoint_tool.h"
+#include "waypoint_tool2.h"
 
 namespace rviz
 {
-WaypointTool::WaypointTool()
+WaypointTool2::WaypointTool2()
 {
   shortcut_key_ = 'w';
 
@@ -17,27 +17,27 @@ WaypointTool::WaypointTool()
                                        getPropertyContainer(), SLOT(updateTopic()), this);
 }
 
-void WaypointTool::onInitialize()
+void WaypointTool2::onInitialize()
 {
   PoseTool::onInitialize();
-  setName("Waypoint");
+  setName("Waypoint2");
   updateTopic();
   vehicle_z = 0;
 }
 
-void WaypointTool::updateTopic()
+void WaypointTool2::updateTopic()
 {
-  sub_ = nh_.subscribe<nav_msgs::Odometry> ("state_estimation", 5, &WaypointTool::odomHandler, this);
-  pub_ = nh_.advertise<geometry_msgs::PointStamped>("/robot1/way_point", 5);
+  sub_ = nh_.subscribe<nav_msgs::Odometry> ("state_estimation", 5, &WaypointTool2::odomHandler, this);
+  pub_ = nh_.advertise<geometry_msgs::PointStamped>("/robot2/way_point2", 5);
   pub_joy_ = nh_.advertise<sensor_msgs::Joy>("joy", 5);
 }
 
-void WaypointTool::odomHandler(const nav_msgs::Odometry::ConstPtr& odom)
+void WaypointTool2::odomHandler(const nav_msgs::Odometry::ConstPtr& odom)
 {
   vehicle_z = odom->pose.pose.position.z;
 }
 
-void WaypointTool::onPoseSet(double x, double y, double theta)
+void WaypointTool2::onPoseSet(double x, double y, double theta)
 {
   sensor_msgs::Joy joy;
 
@@ -67,7 +67,7 @@ void WaypointTool::onPoseSet(double x, double y, double theta)
   pub_joy_.publish(joy);
 
   geometry_msgs::PointStamped waypoint;
-  waypoint.header.frame_id = "map";
+  waypoint.header.frame_id = "map2";
   waypoint.header.stamp = joy.header.stamp;
   waypoint.point.x = x;
   waypoint.point.y = y;
@@ -80,4 +80,4 @@ void WaypointTool::onPoseSet(double x, double y, double theta)
 }
 
 #include <pluginlib/class_list_macros.hpp>
-PLUGINLIB_EXPORT_CLASS(rviz::WaypointTool, rviz::Tool)
+PLUGINLIB_EXPORT_CLASS(rviz::WaypointTool2, rviz::Tool)

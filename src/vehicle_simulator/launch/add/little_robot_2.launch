@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="robot_namespace" default=""/>
+  <!-- Spawn the example robot -->
+  <param name="tf_prefix" value="robot2" />
+
+  
+  <arg name="gpu" default="true"/>
+  <arg name="organize_cloud" default="false"/>
+  <param name="lidar_description" command="$(find xacro)/xacro  '$(find vehicle_simulator)/urdf/lidar.urdf.xacro' organize_cloud:=$(arg organize_cloud) gpu:=$(arg gpu) " />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_lidar2" args="-urdf -param lidar_description -model lidar2 -x 1 -z 0.75" />
+  <!-- ns:=ares2 -->
+  <param name="robot_description" command="$(find xacro)/xacro  '$(find vehicle_simulator)/urdf/robot.urdf.xacro' " />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_robot2" args="-urdf -param robot_description -model robot2 -x 1" />
+
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="20.0" />
+  </node>
+</launch>

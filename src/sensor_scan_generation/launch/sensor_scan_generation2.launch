@@ -1,0 +1,5 @@
+<launch>
+
+  <node pkg="sensor_scan_generation" type="sensorScanGeneration2" name="sensorScanGeneration2" output="screen" required="true"/>
+
+</launch>

@@ -171,16 +171,16 @@ int main(int argc, char** argv)
   nhPrivate.getParam("sendSpeed", sendSpeed);
   nhPrivate.getParam("sendBoundary", sendBoundary);
 
-  ros::Subscriber subPose = nh.subscribe<nav_msgs::Odometry> ("/state_estimation", 5, poseHandler);
+  ros::Subscriber subPose = nh.subscribe<nav_msgs::Odometry> ("state_estimation", 5, poseHandler);
 
-  ros::Publisher pubWaypoint = nh.advertise<geometry_msgs::PointStamped> ("/way_point", 5);
+  ros::Publisher pubWaypoint = nh.advertise<geometry_msgs::PointStamped> ("way_point", 5);
   geometry_msgs::PointStamped waypointMsgs;
   waypointMsgs.header.frame_id = "map";
 
-  ros::Publisher pubSpeed = nh.advertise<std_msgs::Float32> ("/speed", 5);
+  ros::Publisher pubSpeed = nh.advertise<std_msgs::Float32> ("speed", 5);
   std_msgs::Float32 speedMsgs;
 
-  ros::Publisher pubBoundary = nh.advertise<geometry_msgs::PolygonStamped> ("/navigation_boundary", 5);
+  ros::Publisher pubBoundary = nh.advertise<geometry_msgs::PolygonStamped> ("navigation_boundary", 5);
   geometry_msgs::PolygonStamped boundaryMsgs;
   boundaryMsgs.header.frame_id = "map";
 

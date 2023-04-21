@@ -5,7 +5,9 @@
   <node pkg="visualization_tools" type="visualizationTools" name="visualizationTools" output="screen">
     <param name="metricFile" type="string" value="$(find vehicle_simulator)/log/metrics" />
     <param name="trajFile" type="string" value="$(find vehicle_simulator)/log/trajectory" />
-    <param name="mapFile" type="string" value="$(find vehicle_simulator)/mesh/$(arg world_name)/preview/pointcloud.ply" />
+    <!-- <param name="mapFile" type="string" value="$(find vehicle_simulator)/mesh/$(arg world_name)/preview/pointcloud.ply" /> -->
+    <param name="mapFile" type="string" value="/home/ros/Programs/autonomous_exploration_development_environment/src/vehicle_simulator/mesh/garage/preview/pointcloud.ply" />
+
     <param name="overallMapVoxelSize" type="double" value="0.5" />
     <param name="exploredAreaVoxelSize" type="double" value="0.3" />
     <param name="exploredVolumeVoxelSize" type="double" value="0.5" />
@@ -15,6 +17,6 @@
     <param name="exploredAreaDisplayInterval" type="int" value="1" />
   </node>
 
-  <node pkg="visualization_tools" type="realTimePlot.py" name="realTimePlot" output="screen" respawn="true"/>
+  <!-- <node pkg="visualization_tools" type="realTimePlot.py" name="realTimePlot" output="screen" respawn="true"/> -->
 
 </launch>

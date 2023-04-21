@@ -547,7 +547,7 @@ int main(int argc, char** argv)
 
   ros::Subscriber subJoystick = nh.subscribe<sensor_msgs::Joy> ("joy", 5, joystickHandler);
 
-  ros::Subscriber subGoal = nh.subscribe<geometry_msgs::PointStamped> ("way_point", 5, goalHandler);
+  ros::Subscriber subGoal = nh.subscribe<geometry_msgs::PointStamped> ("way_point2", 5, goalHandler);
 
   ros::Subscriber subSpeed = nh.subscribe<std_msgs::Float32> ("speed", 5, speedHandler);
 
@@ -850,7 +850,7 @@ int main(int argc, char** argv)
           }
 
           path.header.stamp = ros::Time().fromSec(odomTime);
-          path.header.frame_id = "vehicle";
+          path.header.frame_id = "vehicle2";
           pubPath.publish(path);
 
           #if PLOTPATHSET == 1
@@ -896,7 +896,7 @@ int main(int argc, char** argv)
           sensor_msgs::PointCloud2 freePaths2;
           pcl::toROSMsg(*freePaths, freePaths2);
           freePaths2.header.stamp = ros::Time().fromSec(odomTime);
-          freePaths2.header.frame_id = "vehicle";
+          freePaths2.header.frame_id = "vehicle2";
           pubFreePaths.publish(freePaths2);
           #endif
         }
@@ -922,7 +922,7 @@ int main(int argc, char** argv)
         path.poses[0].pose.position.z = 0;
 
         path.header.stamp = ros::Time().fromSec(odomTime);
-        path.header.frame_id = "vehicle";
+        path.header.frame_id = "vehicle2";
         pubPath.publish(path);
 
         #if PLOTPATHSET == 1
@@ -930,7 +930,7 @@ int main(int argc, char** argv)
         sensor_msgs::PointCloud2 freePaths2;
         pcl::toROSMsg(*freePaths, freePaths2);
         freePaths2.header.stamp = ros::Time().fromSec(odomTime);
-        freePaths2.header.frame_id = "vehicle";
+        freePaths2.header.frame_id = "vehicle2";
         pubFreePaths.publish(freePaths2);
         #endif
       }
@@ -938,7 +938,7 @@ int main(int argc, char** argv)
       /*sensor_msgs::PointCloud2 plannerCloud2;
       pcl::toROSMsg(*plannerCloudCrop, plannerCloud2);
       plannerCloud2.header.stamp = ros::Time().fromSec(odomTime);
-      plannerCloud2.header.frame_id = "vehicle";
+      plannerCloud2.header.frame_id = "vehicle2";
       pubLaserCloud.publish(plannerCloud2);*/
     }
 
