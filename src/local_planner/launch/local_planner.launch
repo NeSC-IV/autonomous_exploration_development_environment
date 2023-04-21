@@ -1,14 +1,14 @@
 <launch>
 
   <arg name="robot_real" default="false" />
-  <arg name="sensorOffsetX" default="0.05"/>
+  <arg name="sensorOffsetX" default="0.00"/>
   <arg name="sensorOffsetY" default="0"/>
   <arg name="cameraOffsetZ" default="0"/>
   <arg name="twoWayDrive" default="true"/>
   <!-- maxSpeed default = 2 -->
-  <arg name="maxSpeed" default="0.9"/>
+  <arg name="maxSpeed" default="2.0"/>
   <arg name="autonomyMode" default="true"/>
-  <arg name="autonomySpeed" default="0.5"/>
+  <arg name="autonomySpeed" default="2.0"/>
   <arg name="joyToSpeedDelay" default="2.0"/>
   <arg name="goalX" default="0"/>
   <arg name="goalY" default="0"/>
