@@ -1,11 +1,9 @@
 <launch>
 
-  <arg name="robot_real" default="false" />
-  <arg name="sensorOffsetX" default="0.00"/>
+  <arg name="sensorOffsetX" default="0"/>
   <arg name="sensorOffsetY" default="0"/>
   <arg name="cameraOffsetZ" default="0"/>
   <arg name="twoWayDrive" default="true"/>
-  <!-- maxSpeed default = 2 -->
   <arg name="maxSpeed" default="2.0"/>
   <arg name="autonomyMode" default="true"/>
   <arg name="autonomySpeed" default="2.0"/>
@@ -15,8 +13,8 @@
 
   <node pkg="local_planner" type="localPlanner" name="localPlanner" output="screen" required="true">
     <param name="pathFolder" type="string" value="$(find local_planner)/paths" />
-    <param name="vehicleLength" type="double" value="1.0" />
-    <param name="vehicleWidth" type="double" value="1.0" />
+    <param name="vehicleLength" type="double" value="0.6" />
+    <param name="vehicleWidth" type="double" value="0.6" />
     <param name="sensorOffsetX" value="$(arg sensorOffsetX)" />
     <param name="sensorOffsetY" value="$(arg sensorOffsetY)" />
     <param name="twoWayDrive" value="$(arg twoWayDrive)" />
@@ -25,18 +23,15 @@
     <param name="useTerrainAnalysis" type="bool" value="true" />
     <param name="checkObstacle" type="bool" value="true" />
     <param name="checkRotObstacle" type="bool" value="false" />
-    <!-- <param name="adjacentRange" type="double" value="2.25" /> -->
     <param name="adjacentRange" type="double" value="4.25" />
-
-    <param name="obstacleHeightThre" type="double" value="0.3" />
-    <param name="groundHeightThre" type="double" value="0.15" />
+    <param name="obstacleHeightThre" type="double" value="0.15" />
+    <param name="groundHeightThre" type="double" value="0.1" />
     <param name="costHeightThre" type="double" value="0.1" />
     <param name="costScore" type="double" value="0.02" />
     <param name="useCost" type="bool" value="false" />
     <param name="pointPerPathThre" type="int" value="2" />
-    <param name="minRelZ" type="double" value="-0.2" />
-    <param name="maxRelZ" type="double" value="0.45" />
-
+    <param name="minRelZ" type="double" value="-0.5" />
+    <param name="maxRelZ" type="double" value="0.25" />
     <param name="maxSpeed" value="$(arg maxSpeed)" />
     <param name="dirWeight" type="double" value="0.02" />
     <param name="dirThre" type="double" value="90.0" />
@@ -56,7 +51,6 @@
     <param name="goalClearRange" type="double" value="0.5" />
     <param name="goalX" type="double" value="$(arg goalX)" />
     <param name="goalY" type="double" value="$(arg goalY)" />
-    <remap if="$(arg robot_real)" from="/cmd_vel" to="/cmu_cmd_vel"  />
   </node>
 
   <node pkg="local_planner" type="pathFollower" name="pathFollower" output="screen" required="true">
@@ -65,11 +59,11 @@
     <param name="pubSkipNum" type="int" value="1" />
     <param name="twoWayDrive" value="$(arg twoWayDrive)" />
     <param name="lookAheadDis" type="double" value="0.5" />
-    <param name="yawRateGain" type="double" value="5.5" />
-    <param name="stopYawRateGain" type="double" value="5.5" />
+    <param name="yawRateGain" type="double" value="7.5" />
+    <param name="stopYawRateGain" type="double" value="7.5" />
     <param name="maxYawRate" type="double" value="90.0" />
     <param name="maxSpeed" value="$(arg maxSpeed)" />
-    <param name="maxAccel" type="double" value="1.5" />
+    <param name="maxAccel" type="double" value="2.5" />
     <param name="switchTimeThre" type="double" value="1.0" />
     <param name="dirDiffThre" type="double" value="0.1" />
     <param name="stopDisThre" type="double" value="0.2" />
@@ -88,15 +82,7 @@
     <param name="autonomyMode" value="$(arg autonomyMode)" />
     <param name="autonomySpeed" value="$(arg autonomySpeed)" />
     <param name="joyToSpeedDelay" value="$(arg joyToSpeedDelay)" />
-    <remap if="$(arg robot_real)" from="/cmd_vel" to="/cmu_cmd_vel"  />
   </node>
-
-
-  <group if="$(arg robot_real)">
-  <node pkg="local_planner" type="remapTwist" name="remapTwist" required="true" />
-  <!-- Modified -->
-  <node pkg="tf" type="static_transform_publisher" name="velodyneTransPublisher" args="0 0 0 0 0 0 /sensor /velodyne 1000"/>
-  </group>
 
   <node pkg="tf" type="static_transform_publisher" name="vehicleTransPublisher" args="-$(arg sensorOffsetX) -$(arg sensorOffsetY) 0 0 0 0 /sensor /vehicle 1000"/>
 
