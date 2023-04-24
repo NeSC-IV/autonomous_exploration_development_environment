@@ -1,0 +1,59 @@
+<launch>
+
+  <arg name="world_name" default="garage"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="false"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="false"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="verbose" value="$(arg verbose)"/>
+    <arg name="world_name" value="$(find vehicle_simulator)/world/$(arg world_name).world"/>
+  </include>
+
+  <arg name="vehicleHeight" default="0.75"/>
+  <arg name="cameraOffsetZ" default="0"/>
+  <arg name="vehicleX" default="0"/>
+  <arg name="vehicleY" default="0"/>
+  <arg name="terrainZ" default="0"/>
+  <arg name="vehicleYaw" default="0"/>
+  <arg name="gazebo_gui" default="false"/>
+  <arg name="checkTerrainConn" default="true"/>
+
+  <include file="$(find local_planner)/launch/multi_robot/local_planner1.launch" >
+    <arg name="cameraOffsetZ" value="$(arg cameraOffsetZ)"/>
+    <arg name="goalX" value="$(arg vehicleX)"/>
+    <arg name="goalY" value="$(arg vehicleY)"/>
+  </include>
+
+  <include file="$(find terrain_analysis)/launch/multi_robot/terrain_analysis1.launch" />
+
+  <include file="$(find terrain_analysis_ext)/launch/multi_robot/terrain_analysis_ext1.launch" >
+    <arg name="checkTerrainConn" value="$(arg checkTerrainConn)"/>
+  </include>
+
+  <include file="$(find vehicle_simulator)/launch/multi_robot/vehicle_simulator1.launch" >
+    <arg name="vehicleHeight" value="$(arg vehicleHeight)"/>
+    <arg name="cameraOffsetZ" value="$(arg cameraOffsetZ)"/>
+    <arg name="vehicleX" value="$(arg vehicleX)"/>
+    <arg name="vehicleY" value="$(arg vehicleY)"/>
+    <arg name="terrainZ" value="$(arg terrainZ)"/>
+    <arg name="vehicleYaw" value="$(arg vehicleYaw)"/>
+  </include>
+
+  <include file="$(find sensor_scan_generation)/launch/multi_robot/sensor_scan_generation1.launch" />
+
+  <include file="$(find visualization_tools)/launch/multi_robot/visualization_tools1.launch" >
+    <arg name="world_name" value="$(arg world_name)"/>
+  </include>
+
+  <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find vehicle_simulator)/rviz/multi_robot/vehicle_simulator_multi_robot.rviz" respawn="true"/>
+
+</launch>

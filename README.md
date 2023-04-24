@@ -62,4 +62,9 @@ roslaunch vehicle_simulator system_real_robot.launch
 #　在　vehicle_simulator.rviz　目录下运行如下命令：
 rviz -d vehicle_simulator.rviz 
 ```
+## 在原始工程上做的修改
+1. 搭建多机器人仿真环境，目前还在搭建过程中，启动多机器人仿真环境的命令：
+```shell
+roslaunch vehicle_simulator system_garage_multi_robot.launch
+```
 

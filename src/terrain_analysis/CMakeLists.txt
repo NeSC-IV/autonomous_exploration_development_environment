@@ -62,6 +62,19 @@ install(TARGETS terrainAnalysis
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-install(DIRECTORY launch/
+install(DIRECTORY launch/ launch/multi_robot/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+)
+
+# ADD
+## Declare executables
+add_executable(terrainAnalysis1 src/multi_robot/terrainAnalysis1.cpp)
+
+## Specify libraries to link a library or executable target against
+target_link_libraries(terrainAnalysis1 ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES})
+
+install(TARGETS terrainAnalysis1
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

@@ -80,3 +80,17 @@ install(DIRECTORY urdf/
 install(DIRECTORY world/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/world
 )
+
+
+# ADD
+## Declare executables
+add_executable(vehicleSimulator1 src/multi_robot/vehicleSimulator1.cpp)
+
+## Specify libraries to link a library or executable target against
+target_link_libraries(vehicleSimulator1 ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES})
+
+install(TARGETS vehicleSimulator1
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
