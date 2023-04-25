@@ -336,21 +336,21 @@ int main(int argc, char** argv)
   ros::Publisher pubVehicleOdom = nh.advertise<nav_msgs::Odometry>("state_estimation", 5);
 
   nav_msgs::Odometry odomData;
-  odomData.header.frame_id = "map";
-  odomData.child_frame_id = "sensor";
+  odomData.header.frame_id = "robot2/map";
+  odomData.child_frame_id = "robot2/sensor";
 
   tf::TransformBroadcaster tfBroadcaster;
   tf::StampedTransform odomTrans;
-  odomTrans.frame_id_ = "map";
-  odomTrans.child_frame_id_ = "sensor";
+  odomTrans.frame_id_ = "robot2/map";
+  odomTrans.child_frame_id_ = "robot2/sensor";
 
   ros::Publisher pubModelState = nh.advertise<gazebo_msgs::ModelState>("/gazebo/set_model_state", 5);
   gazebo_msgs::ModelState cameraState;
-  cameraState.model_name = "camera";
+  cameraState.model_name = "camera2";
   gazebo_msgs::ModelState lidarState;
-  lidarState.model_name = "lidar";
+  lidarState.model_name = "lidar2";
   gazebo_msgs::ModelState robotState;
-  robotState.model_name = "robot";
+  robotState.model_name = "robot2";
 
   ros::Publisher pubScan = nh.advertise<sensor_msgs::PointCloud2>("registered_scan", 2);
   pubScanPointer = &pubScan;

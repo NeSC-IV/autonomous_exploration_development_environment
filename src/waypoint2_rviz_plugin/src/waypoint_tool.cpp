@@ -13,16 +13,16 @@ WaypointTool::WaypointTool()
 void WaypointTool::onInitialize()
 {
   PoseTool::onInitialize();
-  setName("Waypoint_robot1");
+  setName("Waypoint_robot2");
   updateTopic();
   vehicle_z = 0;
 }
 
 void WaypointTool::updateTopic()
 {
-  sub_ = nh_.subscribe<nav_msgs::Odometry> ("/robot1/state_estimation", 5, &WaypointTool::odomHandler, this);
-  pub_ = nh_.advertise<geometry_msgs::PointStamped>("/robot1/way_point", 5);
-  pub_joy_ = nh_.advertise<sensor_msgs::Joy>("/robot1/joy", 5);
+  sub_ = nh_.subscribe<nav_msgs::Odometry> ("/robot2/state_estimation", 5, &WaypointTool::odomHandler, this);
+  pub_ = nh_.advertise<geometry_msgs::PointStamped>("/robot2/way_point", 5);
+  pub_joy_ = nh_.advertise<sensor_msgs::Joy>("/robot2/joy", 5);
 }
 
 void WaypointTool::odomHandler(const nav_msgs::Odometry::ConstPtr& odom)
@@ -60,7 +60,7 @@ void WaypointTool::onPoseSet(double x, double y, double theta)
   pub_joy_.publish(joy);
 
   geometry_msgs::PointStamped waypoint;
-  waypoint.header.frame_id = "map";
+  waypoint.header.frame_id = "robot2/map";
   waypoint.header.stamp = joy.header.stamp;
   waypoint.point.x = x;
   waypoint.point.y = y;

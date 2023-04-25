@@ -79,3 +79,14 @@ install(TARGETS sensorScanGeneration1
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
+## Declare executables
+add_executable(sensorScanGeneration2 src/multi_robot/sensorScanGeneration2.cpp)
+
+## Specify libraries to link a library or executable target against
+target_link_libraries(sensorScanGeneration2 ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES})
+
+install(TARGETS sensorScanGeneration2
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)

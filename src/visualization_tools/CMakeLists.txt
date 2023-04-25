@@ -86,4 +86,18 @@ install(PROGRAMS scripts/multi_robot/realTimePlot1.py
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/scripts
 )
 
+## Declare executables
+add_executable(visualizationTools2 src/multi_robot/visualizationTools2.cpp)
 
+## Specify libraries to link a library or executable target against
+target_link_libraries(visualizationTools2 ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+
+install(TARGETS visualizationTools2
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(PROGRAMS scripts/multi_robot/realTimePlot2.py
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/scripts
+)

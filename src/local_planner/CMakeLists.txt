@@ -84,3 +84,17 @@ install(TARGETS localPlanner1 pathFollower1
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
+
+## Declare executables
+add_executable(localPlanner2 src/multi_robot/localPlanner2.cpp)
+add_executable(pathFollower2 src/multi_robot/pathFollower2.cpp)
+
+## Specify libraries to link a library or executable target against
+target_link_libraries(localPlanner2 ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+target_link_libraries(pathFollower2 ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+
+install(TARGETS localPlanner2 pathFollower2
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)

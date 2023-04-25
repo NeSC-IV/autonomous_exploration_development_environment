@@ -52,10 +52,10 @@ def listener():
   global time_duration, start_time_duration, explored_volume, traveling_distance, run_time, max_explored_volume, max_traveling_diatance, max_run_time, time_list1, time_list2, time_list3, run_time_list, explored_volume_list, traveling_distance_list
 
   rospy.init_node('realTimePlot')
-  rospy.Subscriber("/time_duration", Float32, timeDurationCallback)
-  rospy.Subscriber("/runtime", Float32, runTimeCallback)
-  rospy.Subscriber("/explored_volume", Float32, exploredVolumeCallback)
-  rospy.Subscriber("/traveling_distance", Float32, travelingDistanceCallback)
+  rospy.Subscriber("time_duration", Float32, timeDurationCallback)
+  rospy.Subscriber("runtime", Float32, runTimeCallback)
+  rospy.Subscriber("explored_volume", Float32, exploredVolumeCallback)
+  rospy.Subscriber("traveling_distance", Float32, travelingDistanceCallback)
 
   fig=plt.figure(figsize=(8,7))
   fig1=fig.add_subplot(311)
