@@ -97,6 +97,6 @@
 
   <node pkg="tf" type="static_transform_publisher" name="sensorTransPublisher" args="0 0 $(arg cameraOffsetZ) -1.5707963 0 -1.5707963 /robot2/sensor /robot2/camera 1000"/>
 
-  <node pkg="tf" type="static_transform_publisher" name="mapTransPublisher" args="0 0 0 0 0 0 map /robot2/map 1000"/>
+  <node pkg="tf" type="static_transform_publisher" name="mapTransPublisher" args="0 0 0 0 0 0 map /robot2/map 200"/>
 
 </launch>

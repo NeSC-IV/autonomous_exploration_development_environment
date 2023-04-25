@@ -1,5 +1,5 @@
-#ifndef WAYPOINT_RVIZ_PLUGIN_WAYPOINT_TOOL_H
-#define WAYPOINT_RVIZ_PLUGIN_WAYPOINT_TOOL_H
+#ifndef WAYPOINT_RVIZ_PLUGIN_WAYPOINT_TOOL2_H
+#define WAYPOINT_RVIZ_PLUGIN_WAYPOINT_TOOL2_H
 
 #include <sstream>
 #include <ros/ros.h>
@@ -17,12 +17,12 @@ namespace rviz
 {
 class StringProperty;
 
-class WaypointTool : public PoseTool
+class WaypointTool2 : public PoseTool
 {
   Q_OBJECT
 public:
-  WaypointTool();
-  virtual ~WaypointTool()
+  WaypointTool2();
+  virtual ~WaypointTool2()
   {
   }
   virtual void onInitialize();

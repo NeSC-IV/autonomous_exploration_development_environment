@@ -6,11 +6,11 @@
         "limitSymbolsToIncludedHeaders": false
       },
       "includePath": [
-        "/home/ros/ws_livox/devel/include/**",
+        "/home/husky/Lenovo/autonomous_exploration_development_environment/devel/include/**",
         "/opt/ros/noetic/include/**",
-        "/home/ros/ws_livox/src/FAST_LIO/include/**",
-        "/home/ros/Programs/autonomous_exploration_development_environment/src/velodyne_simulator/velodyne_gazebo_plugins/include/**",
-        "/home/ros/Programs/autonomous_exploration_development_environment/src/waypoint_rviz_plugin/include/**",
+        "/home/husky/Lenovo/autonomous_exploration_development_environment/src/velodyne_simulator/velodyne_gazebo_plugins/include/**",
+        "/home/husky/Lenovo/autonomous_exploration_development_environment/src/waypoint2_rviz_plugin/include/**",
+        "/home/husky/Lenovo/autonomous_exploration_development_environment/src/waypoint_rviz_plugin/include/**",
         "/usr/include/**"
       ],
       "name": "ROS",

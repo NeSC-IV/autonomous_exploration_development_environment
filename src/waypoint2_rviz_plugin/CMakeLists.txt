@@ -32,10 +32,10 @@ include_directories(
 )
 
 set(HEADER_FILES
-        include/waypoint_tool.h
+        include/waypoint_tool2.h
 )
 set(SRC_FILES
-    src/waypoint_tool.cpp
+    src/waypoint_tool2.cpp
 )
 
 add_library(${PROJECT_NAME}
