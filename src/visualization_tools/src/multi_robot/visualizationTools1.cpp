@@ -34,8 +34,8 @@ string mapFile;
 double overallMapVoxelSize = 0.5;
 double exploredAreaVoxelSize = 0.3;
 double exploredVolumeVoxelSize = 0.5;
-double transInterval = 0.2;
-double yawInterval = 10.0;
+double transInterval = 0.2; //移动阈值
+double yawInterval = 10.0; //姿态阈值
 int overallMapDisplayInterval = 2;
 int overallMapDisplayCount = 0;
 int exploredAreaDisplayInterval = 1;
@@ -48,17 +48,19 @@ pcl::PointCloud<pcl::PointXYZI>::Ptr exploredAreaCloud(new pcl::PointCloud<pcl::
 pcl::PointCloud<pcl::PointXYZI>::Ptr exploredAreaCloud2(new pcl::PointCloud<pcl::PointXYZI>());
 pcl::PointCloud<pcl::PointXYZI>::Ptr exploredVolumeCloud(new pcl::PointCloud<pcl::PointXYZI>());
 pcl::PointCloud<pcl::PointXYZI>::Ptr exploredVolumeCloud2(new pcl::PointCloud<pcl::PointXYZI>());
-pcl::PointCloud<pcl::PointXYZI>::Ptr trajectory(new pcl::PointCloud<pcl::PointXYZI>());
+pcl::PointCloud<pcl::PointXYZI>::Ptr trajectory(new pcl::PointCloud<pcl::PointXYZI>()); //3D空间中的轨迹用点云的消息类型表示
 
-const int systemDelay = 5;
-int systemDelayCount = 0;
-bool systemDelayInited = false;
-double systemTime = 0;
-double systemInitTime = 0;
-bool systemInited = false;
+const int systemDelay = 5; //系统延时初始化时间
+int systemDelayCount = 0; //系统延时初始化计数器
+bool systemDelayInited = false; //系统延时初始化标志
+double systemTime = 0; //系统当前运行时间
+double systemInitTime = 0; //系统运行起始时间
+bool systemInited = false; //系统初始化标志
 
 float vehicleYaw = 0;
 float vehicleX = 0, vehicleY = 0, vehicleZ = 0;
+// timeDuration 是当前程序的运行时间
+// travelingDis 是当前程序的探索距离
 float exploredVolume = 0, travelingDis = 0, runtime = 0, timeDuration = 0;
 
 pcl::VoxelGrid<pcl::PointXYZ> overallMapDwzFilter;
@@ -76,6 +78,14 @@ ros::Publisher *pubTimeDurationPtr = NULL;
 FILE *metricFilePtr = NULL;
 FILE *trajFilePtr = NULL;
 
+/**
+ * 1. 从odom话题获取odom的时间。用于计算当前程序的运行时间，并发布相应ROS消息。
+ * 2. 从odom话题获取当前sensor相对于map的姿态，用欧拉角来表示。然后计算当前帧雷达朝向上一帧雷达朝向差值的绝对值。
+ * 3. 计算sensor当前位置与上一帧位置之间的欧式距离。
+ * 4. 系统没有初始化时，将sensor的当前位姿设置为sensor的起始位姿。
+ * 5. 将机器人的位姿和程序的运行时间保存到文件中。
+ * 6. 将机器人的轨迹在rviz的点云图中可视化
+*/
 void odometryHandler(const nav_msgs::Odometry::ConstPtr& odom)
 {
   systemTime = odom->header.stamp.toSec();
