@@ -38,15 +38,15 @@ double transInterval = 0.2; //移动阈值
 double yawInterval = 10.0; //姿态阈值
 int overallMapDisplayInterval = 2;
 int overallMapDisplayCount = 0;
-int exploredAreaDisplayInterval = 1;
-int exploredAreaDisplayCount = 0;
+int exploredAreaDisplayInterval = 1; //用于设置显示已经探索的区域的显示间隔
+int exploredAreaDisplayCount = 0; //用于计数目的
 
-pcl::PointCloud<pcl::PointXYZI>::Ptr laserCloud(new pcl::PointCloud<pcl::PointXYZI>());
+pcl::PointCloud<pcl::PointXYZI>::Ptr laserCloud(new pcl::PointCloud<pcl::PointXYZI>()); //用于保存点云的全局变量
 pcl::PointCloud<pcl::PointXYZ>::Ptr overallMapCloud(new pcl::PointCloud<pcl::PointXYZ>());
 pcl::PointCloud<pcl::PointXYZ>::Ptr overallMapCloudDwz(new pcl::PointCloud<pcl::PointXYZ>());
-pcl::PointCloud<pcl::PointXYZI>::Ptr exploredAreaCloud(new pcl::PointCloud<pcl::PointXYZI>());
+pcl::PointCloud<pcl::PointXYZI>::Ptr exploredAreaCloud(new pcl::PointCloud<pcl::PointXYZI>()); //用于存储已经探索过的区域的点云
 pcl::PointCloud<pcl::PointXYZI>::Ptr exploredAreaCloud2(new pcl::PointCloud<pcl::PointXYZI>());
-pcl::PointCloud<pcl::PointXYZI>::Ptr exploredVolumeCloud(new pcl::PointCloud<pcl::PointXYZI>());
+pcl::PointCloud<pcl::PointXYZI>::Ptr exploredVolumeCloud(new pcl::PointCloud<pcl::PointXYZI>()); //用于存储已经探索过的全部点云
 pcl::PointCloud<pcl::PointXYZI>::Ptr exploredVolumeCloud2(new pcl::PointCloud<pcl::PointXYZI>());
 pcl::PointCloud<pcl::PointXYZI>::Ptr trajectory(new pcl::PointCloud<pcl::PointXYZI>()); //3D空间中的轨迹用点云的消息类型表示
 
@@ -167,20 +167,20 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr& laserCloudIn)
   laserCloud->clear();
   pcl::fromROSMsg(*laserCloudIn, *laserCloud);
 
-  *exploredVolumeCloud += *laserCloud;
+  *exploredVolumeCloud += *laserCloud; //可见已经探索过的全部点云是配准的点云的累加
 
   exploredVolumeCloud2->clear();
   exploredVolumeDwzFilter.setInputCloud(exploredVolumeCloud);
   exploredVolumeDwzFilter.filter(*exploredVolumeCloud2);
 
   pcl::PointCloud<pcl::PointXYZI>::Ptr tempCloud = exploredVolumeCloud;
-  exploredVolumeCloud = exploredVolumeCloud2;
+  exploredVolumeCloud = exploredVolumeCloud2; //到这个地方，exploredVolumeCloud中存储的是降采样后的已经探索过的点云
   exploredVolumeCloud2 = tempCloud;
 
   exploredVolume = exploredVolumeVoxelSize * exploredVolumeVoxelSize * 
                    exploredVolumeVoxelSize * exploredVolumeCloud->points.size();
 
-  *exploredAreaCloud += *laserCloud;
+  *exploredAreaCloud += *laserCloud; //可见已经探索过的全部区域的点云也是配准的点云的累加
 
   exploredAreaDisplayCount++;
   if (exploredAreaDisplayCount >= 5 * exploredAreaDisplayInterval) {
@@ -189,7 +189,7 @@ void laserCloudHandler(const sensor_msgs::PointCloud2ConstPtr& laserCloudIn)
     exploredAreaDwzFilter.filter(*exploredAreaCloud2);
 
     tempCloud = exploredAreaCloud;
-    exploredAreaCloud = exploredAreaCloud2;
+    exploredAreaCloud = exploredAreaCloud2;//到这个地方， exploredAreaCloud 中存储的是降采样后的已经探索过区域的点云
     exploredAreaCloud2 = tempCloud;
 
     sensor_msgs::PointCloud2 exploredArea2;
